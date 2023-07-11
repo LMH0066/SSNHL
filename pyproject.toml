@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "SSNHL"
+version = "0.1.0"
+description = ""
+authors = ["liminghong.dev <lmh0066@outlook.com>"]
+license = "Apache License 2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.24.3"
+scikit-learn = "^1.2.2"
+pandas = "^2.0.2"
+matplotlib = "^3.7.1"
+openpyxl = "^3.1.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
