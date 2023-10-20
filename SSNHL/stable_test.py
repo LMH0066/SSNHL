@@ -1,9 +1,13 @@
+import click
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import *
 from sklearn.model_selection import train_test_split
-from util import load_data, train_model
+from sklearn.svm import SVC
+
+from SSNHL.dbn import SupervisedDBNClassification
+from SSNHL.util import load_data, train_model
 
 
 def calculate(X, y):
@@ -16,12 +20,20 @@ def calculate(X, y):
         # Bagging
         RandomForestClassifier,
         ExtraTreesClassifier,
+        # Other
+        SupervisedDBNClassification,
+        SVC,
     ]
     results, rocs = dict(), dict()
     for function in functions:
         accuracy, roc = [], [[], [], []]
         for random_state in range(1, 51):
-            clf = function(n_estimators=100, random_state=random_state)
+            if function is SupervisedDBNClassification:
+                clf = function()
+            elif function is SVC:
+                clf = function(probability=True)
+            else:
+                clf = function(n_estimators=100, random_state=random_state)
 
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=0.3, random_state=random_state
@@ -42,8 +54,11 @@ def calculate(X, y):
     return results, rocs
 
 
-if __name__ == "__main__":
-    X, y = load_data("../raw_data/all.xlsx")
+@click.command()
+@click.option("--data_path", help=".xlsx file path", type=str)
+@click.option("--output_dir", help="Folder path for results output", type=str)
+def run(data_path, output_dir):
+    X, y = load_data(data_path)
     targets = {
         "effective": {0: 0, 1: 1, 2: 1, 3: 1},
         "markedly effective": {0: 0, 1: 0, 2: 1, 3: 1},
@@ -70,6 +85,10 @@ if __name__ == "__main__":
             plt.ylabel("Recall")
             plt.xlabel("Fall-out")
 
-        plt.savefig("../output/ROC_{}.pdf".format(target))
+        plt.savefig("{}/ROC_{}.pdf".format(output_dir, target))
         plt.cla()
-        pd.DataFrame(results).to_csv("../output/accuracy_{}.csv".format(target))
+        pd.DataFrame(results).to_csv("{}/accuracy_{}.csv".format(output_dir, target))
+
+
+if __name__ == "__main__":
+    run()
