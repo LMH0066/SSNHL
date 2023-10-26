@@ -1,0 +1,23 @@
+feature,ineffective,effective,markedly effective,cured
+blood routine-white blood cells,20,7,2,3
+blood routine-hemoglobin,22,7,2,4
+blood routine-platelet,22,7,2,4
+coagulation function-fibrinogen-before treatment,19,8,4,4
+blood lipids-cholesterol,17,2,2,3
+demographic-height,15,1,5,1
+demographic-weight,15,1,5,1
+demographic-BMI,15,1,5,1
+treatment plan-ginkgo biloba,9,0,1,1
+treatment plan-hormone,9,0,1,1
+treatment plan-batroxobin,9,0,1,1
+treatment plan-behind the ear,9,0,1,1
+treatment plan-tympanic injection,1,0,0,0
+pure tone analysis-left-mean hearing threshold,17,3,17,0
+pure tone analysis-left-curve type,4,0,1,3
+pure tone analysis-left-grade,0,0,0,1
+pure tone analysis-right-mean hearing threshold,28,2,18,2
+pure tone analysis-right-curve type,4,0,1,1
+pure tone analysis-right-grade,2,0,1,0
+revive,18,2,4,6
+ABR,18,2,5,8
+otoacoustic emission (500-6000Hz),47,11,11,14
