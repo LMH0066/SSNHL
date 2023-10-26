@@ -59,7 +59,7 @@ def calculate(X, y):
 @click.option("--output_dir", help="Folder path for results output", type=str)
 @click.option("--preprocess_func", default="default", type=str)
 def run(data_path, output_dir, preprocess_func):
-    X, y = load_data(data_path, preprocess_func)
+    X, y, _ = load_data(data_path, preprocess_func)
     targets = {
         "effective": {0: 0, 1: 1, 2: 1, 3: 1},
         "markedly effective": {0: 0, 1: 0, 2: 1, 3: 1},

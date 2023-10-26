@@ -9,20 +9,22 @@ from sklearn.preprocessing import label_binarize
 from SSNHL.rpca.extendedRCPA import extendedRPCA
 
 
-def load_data(file_path, preprocess_func):
+def load_data(file_path, preprocess_func: str):
     data = pd.read_excel(file_path, index_col=0, skiprows=[1, 4], header=[0, 1, 2])
     data = data.drop(["note"], axis=1)
 
-    result_col = ("efficacy evaluation", "Unnamed: 37_level_1", "Unnamed: 37_level_2")
-    data = data.dropna(subset=[result_col])
-    y = data[result_col].copy()
-    data = data.drop(["efficacy evaluation"], axis=1)
+    if preprocess_func:
+        result_col = ("efficacy evaluation", "Unnamed: 37_level_1", "Unnamed: 37_level_2")
+        data = data.dropna(subset=[result_col])
+        y = data[result_col].copy()
+        data = data.drop(["efficacy evaluation"], axis=1)
 
-    filter_data = Preprocess().do(data, preprocess_func)
-    X = np.array(filter_data)
-    y = np.array(y[filter_data.index])
-
-    return X, y
+        filter_data = Preprocess().do(data, preprocess_func)
+        X = np.array(filter_data)
+        y = np.array(y[filter_data.index])
+        return X, y, filter_data
+    else:
+        return data
 
 
 class Preprocess:
