@@ -1,63 +1,63 @@
-feature,value,ineffective,effective,markedly effective,cured
-sex,0,159,42,41,81
-sex,1,151,35,53,46
-ear,L,156,32,46,70
-ear,L/R,5,1,1,0
-ear,R,149,44,47,57
-time of onset,0,134,50,76,103
-time of onset,1,52,16,10,14
-time of onset,2,124,11,8,10
-symptom-vertigo,0,198,43,49,112
-symptom-vertigo,1,112,34,45,15
-symptom-ear blockage,0,144,29,50,38
-symptom-ear blockage,1,166,48,44,89
-symptom-tinnitus,0,26,3,9,20
-symptom-tinnitus,1,284,74,85,107
-past medical history-hypertension,0,240,65,75,114
-past medical history-hypertension,1,70,12,19,13
-past medical history-diabetes,0,282,68,86,125
-past medical history-diabetes,1,28,9,8,2
-past medical history-tinnitus,0,295,77,92,122
-past medical history-tinnitus,1,15,0,2,5
-past medical history-hearing loss,0,269,75,89,116
-past medical history-hearing loss,1,41,2,5,11
-treatment plan-ginkgo biloba,0,7,1,1,1
-treatment plan-ginkgo biloba,1,294,76,92,125
-treatment plan-hormone,0,44,12,12,8
-treatment plan-hormone,1,257,65,81,118
-treatment plan-batroxobin,0,116,21,30,74
-treatment plan-batroxobin,1,185,56,63,52
-treatment plan-behind the ear,0,106,19,33,45
-treatment plan-behind the ear,1,195,58,60,81
-treatment plan-tympanic injection,0,108,33,27,100
-treatment plan-tympanic injection,1,201,44,67,27
-pure tone analysis-left-curve type,0,106,27,34,45
-pure tone analysis-left-curve type,1,30,5,0,38
-pure tone analysis-left-curve type,2,37,15,9,8
-pure tone analysis-left-curve type,3,86,16,18,27
-pure tone analysis-left-curve type,4,47,14,32,6
-pure tone analysis-left-grade,0,120,32,36,76
-pure tone analysis-left-grade,1,45,8,7,13
-pure tone analysis-left-grade,2,35,10,3,13
-pure tone analysis-left-grade,3,36,6,7,11
-pure tone analysis-left-grade,4,0,0,0,1
-pure tone analysis-left-grade,5,36,13,14,11
-pure tone analysis-left-grade,6,37,8,27,1
-pure tone analysis-left-grade,7,1,0,0,0
-pure tone analysis-right-curve type,0,102,20,35,63
-pure tone analysis-right-curve type,1,24,5,0,29
-pure tone analysis-right-curve type,2,48,14,8,6
-pure tone analysis-right-curve type,3,76,20,15,22
-pure tone analysis-right-curve type,4,56,18,35,6
-pure tone analysis-right-grade,0,118,22,38,74
-pure tone analysis-right-grade,1,36,9,4,19
-pure tone analysis-right-grade,2,33,9,0,8
-pure tone analysis-right-grade,3,38,7,7,12
-pure tone analysis-right-grade,5,39,16,15,9
-pure tone analysis-right-grade,6,44,14,29,5
-revive,0,191,56,81,65
-revive,1,101,19,9,56
-ABR,0,153,31,26,113
-ABR,1,139,44,63,6
-otoacoustic emission (500-6000Hz),0,62,14,6,85
-otoacoustic emission (500-6000Hz),1,201,52,77,28
+feature,value,ineffective,effective,markedly effective,cured,P
+sex,0,159,42,41,81,0.021459963573288405
+sex,1,151,35,53,46,0.021459963573288405
+ear,L,156,32,46,70,0.49299534957166347
+ear,L/R,5,1,1,0,0.49299534957166347
+ear,R,149,44,47,57,0.49299534957166347
+time of onset,0,134,50,76,103,1.026735361606085e-17
+time of onset,1,52,16,10,14,1.026735361606085e-17
+time of onset,2,124,11,8,10,1.026735361606085e-17
+symptom-vertigo,0,198,43,49,112,9.875516821182502e-09
+symptom-vertigo,1,112,34,45,15,9.875516821182502e-09
+symptom-ear blockage,0,144,29,50,38,0.0016122628362981116
+symptom-ear blockage,1,166,48,44,89,0.0016122628362981116
+symptom-tinnitus,0,26,3,9,20,0.029400363349582827
+symptom-tinnitus,1,284,74,85,107,0.029400363349582827
+past medical history-hypertension,0,240,65,75,114,0.02161898659458963
+past medical history-hypertension,1,70,12,19,13,0.02161898659458963
+past medical history-diabetes,0,282,68,86,125,0.026090289606669453
+past medical history-diabetes,1,28,9,8,2,0.026090289606669453
+past medical history-tinnitus,0,295,77,92,122,0.1830848383764348
+past medical history-tinnitus,1,15,0,2,5,0.1830848383764348
+past medical history-hearing loss,0,269,75,89,116,0.011477815655631607
+past medical history-hearing loss,1,41,2,5,11,0.011477815655631607
+treatment plan-ginkgo biloba,0,7,1,1,1,0.6510080187155982
+treatment plan-ginkgo biloba,1,294,76,92,125,0.6510080187155982
+treatment plan-hormone,0,44,12,12,8,0.10451218728324883
+treatment plan-hormone,1,257,65,81,118,0.10451218728324883
+treatment plan-batroxobin,0,116,21,30,74,9.118763366019705e-06
+treatment plan-batroxobin,1,185,56,63,52,9.118763366019705e-06
+treatment plan-behind the ear,0,106,19,33,45,0.32889478765002217
+treatment plan-behind the ear,1,195,58,60,81,0.32889478765002217
+treatment plan-tympanic injection,0,108,33,27,100,1.574095831772535e-17
+treatment plan-tympanic injection,1,201,44,67,27,1.574095831772535e-17
+pure tone analysis-left-curve type,0,106,27,34,45,7.198460042860925e-14
+pure tone analysis-left-curve type,1,30,5,0,38,7.198460042860925e-14
+pure tone analysis-left-curve type,2,37,15,9,8,7.198460042860925e-14
+pure tone analysis-left-curve type,3,86,16,18,27,7.198460042860925e-14
+pure tone analysis-left-curve type,4,47,14,32,6,7.198460042860925e-14
+pure tone analysis-left-grade,0,120,32,36,76,2.1826689099403e-06
+pure tone analysis-left-grade,1,45,8,7,13,2.1826689099403e-06
+pure tone analysis-left-grade,2,35,10,3,13,2.1826689099403e-06
+pure tone analysis-left-grade,3,36,6,7,11,2.1826689099403e-06
+pure tone analysis-left-grade,4,0,0,0,1,2.1826689099403e-06
+pure tone analysis-left-grade,5,36,13,14,11,2.1826689099403e-06
+pure tone analysis-left-grade,6,37,8,27,1,2.1826689099403e-06
+pure tone analysis-left-grade,7,1,0,0,0,2.1826689099403e-06
+pure tone analysis-right-curve type,0,102,20,35,63,3.7694851683873016e-14
+pure tone analysis-right-curve type,1,24,5,0,29,3.7694851683873016e-14
+pure tone analysis-right-curve type,2,48,14,8,6,3.7694851683873016e-14
+pure tone analysis-right-curve type,3,76,20,15,22,3.7694851683873016e-14
+pure tone analysis-right-curve type,4,56,18,35,6,3.7694851683873016e-14
+pure tone analysis-right-grade,0,118,22,38,74,2.0964975892472206e-08
+pure tone analysis-right-grade,1,36,9,4,19,2.0964975892472206e-08
+pure tone analysis-right-grade,2,33,9,0,8,2.0964975892472206e-08
+pure tone analysis-right-grade,3,38,7,7,12,2.0964975892472206e-08
+pure tone analysis-right-grade,5,39,16,15,9,2.0964975892472206e-08
+pure tone analysis-right-grade,6,44,14,29,5,2.0964975892472206e-08
+revive,0,191,56,81,65,2.1976604305552884e-07
+revive,1,101,19,9,56,2.1976604305552884e-07
+ABR,0,153,31,26,113,4.005042342756793e-23
+ABR,1,139,44,63,6,4.005042342756793e-23
+otoacoustic emission (500-6000Hz),0,62,14,6,85,1.258907847615096e-28
+otoacoustic emission (500-6000Hz),1,201,52,77,28,1.258907847615096e-28

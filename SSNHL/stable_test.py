@@ -1,5 +1,4 @@
 import click
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import *
@@ -43,10 +42,9 @@ def calculate(X, y):
             )
 
             accuracy.append(_accuracy)
-            roc[0].extend(_roc[0].tolist())
-            roc[1].extend(_roc[1].tolist())
+            roc[0].append(_roc[0].tolist())
+            roc[1].append(_roc[1].tolist())
             roc[2].append(_roc[2])
-        roc[2] = sum(roc[2]) / len(roc[2])
 
         results[clf.__class__.__name__] = accuracy
         rocs[clf.__class__.__name__] = roc
@@ -75,20 +73,8 @@ def run(data_path, output_dir, preprocess_func):
 
         results, rocs = calculate(X, _y)
 
-        for func_name in results.keys():
-            result, roc = results[func_name], rocs[func_name]
-
-            plt.scatter(roc[0], roc[1], label=f"AUC_{func_name}=%0.3f" % roc[2])
-            plt.legend(loc="best", frameon=False)
-            plt.plot([0, 1], [0, 1], "r--")
-            plt.xlim([0.0, 1.0])
-            plt.ylim([0.0, 1.0])
-            plt.ylabel("Recall")
-            plt.xlabel("Fall-out")
-
-        plt.savefig("{}/ROC_{}.pdf".format(output_dir, target))
-        plt.cla()
         pd.DataFrame(results).to_csv("{}/accuracy_{}.csv".format(output_dir, target))
+        np.save("{}/ROC_{}.npy".format(output_dir, target), rocs)
 
 
 if __name__ == "__main__":
