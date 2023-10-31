@@ -14,7 +14,11 @@ def load_data(file_path, preprocess_func: str):
     data = data.drop(["note"], axis=1)
 
     if preprocess_func:
-        result_col = ("efficacy evaluation", "Unnamed: 37_level_1", "Unnamed: 37_level_2")
+        result_col = (
+            "efficacy evaluation",
+            "Unnamed: 37_level_1",
+            "Unnamed: 37_level_2",
+        )
         data = data.dropna(subset=[result_col])
         y = data[result_col].copy()
         data = data.drop(["efficacy evaluation"], axis=1)
@@ -128,14 +132,12 @@ def train_model(clf, X_train, y_train, X_test, y_test, n_class):
     y_pred_proba = clf.predict_proba(X_test)
 
     if n_class == 2:
-        false_positive_rate, recall, _ = roc_curve(y_test, y_pred_proba[:, 1])
+        fpr, tpr, thersholds = roc_curve(y_test, y_pred_proba[:, 1])
     else:
         # multi class
         y_test_one_hot = label_binarize(y_test, classes=np.arange(n_class))
-        false_positive_rate, recall, _ = roc_curve(
-            y_test_one_hot.ravel(), y_pred_proba.ravel()
-        )
-    roc_auc = auc(false_positive_rate, recall)
-    roc = [false_positive_rate, recall, roc_auc]
+        fpr, tpr, thersholds = roc_curve(y_test_one_hot.ravel(), y_pred_proba.ravel())
+    roc_auc = auc(fpr, tpr)
+    roc = [fpr, tpr, roc_auc]
 
     return accuracy, roc
