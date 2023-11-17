@@ -10,15 +10,10 @@ from SSNHL.rpca.extendedRCPA import extendedRPCA
 
 
 def load_data(file_path, preprocess_func: str):
-    data = pd.read_excel(file_path, index_col=0, skiprows=[1, 4], header=[0, 1, 2])
-    data = data.drop(["note"], axis=1)
+    data = pd.read_excel(file_path, index_col=0, header=[0])
 
     if preprocess_func:
-        result_col = (
-            "efficacy evaluation",
-            "Unnamed: 37_level_1",
-            "Unnamed: 37_level_2",
-        )
+        result_col = "efficacy evaluation"
         data = data.dropna(subset=[result_col])
         y = data[result_col].copy()
         data = data.drop(["efficacy evaluation"], axis=1)
@@ -54,39 +49,16 @@ class Preprocess:
 
     def default(self, data: pd.DataFrame) -> pd.DataFrame:
         filter_data = data.copy()
-        filter_data = filter_data.drop(
-            ("coagulation function", "fibrinogen", "after treatment"), axis=1
-        )
-        filter_data = filter_data.drop(
-            ("blood lipids", "Unnamed: 17_level_1", "triglycerides"), axis=1
-        )
-        filter_data = filter_data.drop(
-            ("treatment plan", "Unnamed: 27_level_1", "tympanic injection time"), axis=1
-        )
 
         filter_data["ear"] = filter_data["ear"].replace(["L", "R", "L/R"], [1, 2, 3])
 
         filter_data = filter_data.dropna()
-        filter_data = self._clean_row(filter_data, "-")
-        filter_data = self._clean_row(filter_data, "normal")
         return filter_data
 
     def rpca(self, data: pd.DataFrame, iter=10000) -> pd.DataFrame:
         filter_data = data.copy()
-        filter_data = filter_data.drop(
-            ("coagulation function", "fibrinogen", "after treatment"), axis=1
-        )
-        filter_data = filter_data.drop(
-            ("blood lipids", "Unnamed: 17_level_1", "triglycerides"), axis=1
-        )
-        filter_data = filter_data.drop(
-            ("treatment plan", "Unnamed: 27_level_1", "tympanic injection time"), axis=1
-        )
 
         filter_data["ear"] = filter_data["ear"].replace(["L", "R", "L/R"], [1, 2, 3])
-
-        filter_data = filter_data.replace("-", np.nan)
-        filter_data = filter_data.replace("normal", np.nan)
 
         m, n = filter_data.shape
         omega = np.where(filter_data.notnull() == True)
@@ -103,20 +75,8 @@ class Preprocess:
 
     def KNN(self, data: pd.DataFrame) -> pd.DataFrame:
         filter_data = data.copy()
-        filter_data = filter_data.drop(
-            ("coagulation function", "fibrinogen", "after treatment"), axis=1
-        )
-        filter_data = filter_data.drop(
-            ("blood lipids", "Unnamed: 17_level_1", "triglycerides"), axis=1
-        )
-        filter_data = filter_data.drop(
-            ("treatment plan", "Unnamed: 27_level_1", "tympanic injection time"), axis=1
-        )
 
         filter_data["ear"] = filter_data["ear"].replace(["L", "R", "L/R"], [1, 2, 3])
-
-        filter_data = filter_data.replace("-", np.nan)
-        filter_data = filter_data.replace("normal", np.nan)
 
         filled_data = KNN(k=10).fit_transform(filter_data)
         filter_data[:] = filled_data
