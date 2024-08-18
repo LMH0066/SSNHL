@@ -1,6 +1,11 @@
-python stable_test.py --data_path ../raw_data/all.xlsx --output_dir ../output/control --preprocess_func default
-python stable_test.py --data_path ../raw_data/all.xlsx --output_dir ../output/data_fill/KNN --preprocess_func KNN
-python stable_test.py --data_path ../raw_data/all.xlsx --output_dir ../output/data_fill/rpca --preprocess_func rpca
+# python stable_test.py --data_path ../raw_data/all.xlsx --output_dir ../output/control --preprocess_func default
+# python stable_test.py --data_path ../raw_data/all.xlsx --output_dir ../output/miNNseq --preprocess_func miNNseq
 
-python RF_feature_importance.py --data_path ../raw_data/all.xlsx --output_dir ../output/control --preprocess_func default
-python RF_feature_importance.py --data_path ../raw_data/all.xlsx --output_dir ../output/data_fill/KNN --preprocess_func KNN
+# python regression_stable_test.py --data_path ../raw_data/all.xlsx --output_dir ../output/regression_control --preprocess_func default
+
+# python RF_feature_importance.py --data_path ../raw_data/all.xlsx --output_dir ../output/control --preprocess_func default
+# python RF_feature_importance.py --data_path ../raw_data/all.xlsx --output_dir ../output/miNNseq --preprocess_func miNNseq
+
+
+python stable_test.py --data_path ../raw_data/all.xlsx --output_dir ../output/test/control --preprocess_func default
+python stable_test.py --data_path ../raw_data/all.xlsx --output_dir ../output/test/miNNseq --preprocess_func miNNseq

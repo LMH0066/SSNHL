@@ -1,14 +1,15 @@
-feature,ineffective,effective,markedly effective,cured
-white blood cells,20,7,2,3
-hemoglobin,22,7,2,4
-platelet,22,7,2,4
-fibrinogen,19,8,4,4
-cholesterol,17,2,2,3
-height,15,1,5,1
-weight,15,1,5,1
+feature,no recovery,minor recovery,important recovery,full recovery
+White blood cells,20,7,2,3
+Hemoglobin,22,7,2,4
+Platelet,22,7,2,4
+Fibrinogen,19,8,4,4
+Cholesterol,17,2,2,3
+Height,15,1,5,1
+Weight,15,1,5,1
 BMI,15,1,5,1
-mean hearing threshold(contralateral),2,0,1,1
-curve type(contralateral),7,0,2,4
-revive(affected side),16,2,4,6
+Mean hearing threshold (contralateral),2,0,1,1
+WHO classify (contralateral),2,0,1,1
+Curve type (contralateral),7,0,2,4
+loudness recruitment(affected side),16,2,4,6
 ABR,18,2,5,8
-otoacoustic emission (500-6000Hz),45,11,11,14
+DPOAE response,45,11,11,14

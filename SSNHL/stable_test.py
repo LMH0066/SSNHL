@@ -4,9 +4,10 @@ import pandas as pd
 from sklearn.ensemble import *
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
+from statsmodels.miscmodels.ordinal_model import OrderedModel
 
 from SSNHL.dbn import SupervisedDBNClassification
-from SSNHL.util import load_data, train_model
+from SSNHL.util import load_data, train_model, train_ordered_model
 
 
 def calculate(X, y):
@@ -22,24 +23,44 @@ def calculate(X, y):
         # Other
         SupervisedDBNClassification,
         SVC,
+        OrderedModel
     ]
     results, rocs = dict(), dict()
     for function in functions:
         accuracy, roc = [], [[], [], []]
         for random_state in range(1, 51):
-            if function is SupervisedDBNClassification:
-                clf = function()
+            '''
+            The hyperparameters of GB, RF, ET and SVC are set based on:
+            R. S. Olson, W. L. Cava, Z. Mustahsan, A. Varik, J. H. Moore,
+            Data-driven advice for applying machine learning to bioinformatics problems.
+            Pacific Symposium on Biocomputing. 23, 192–203 (2018).
+            '''
+            if function is AdaBoostClassifier:
+                clf = function(n_estimators=1000, random_state=random_state)
+            elif function is GradientBoostingClassifier:
+                clf = function(loss='log_loss', n_estimators=500, max_features='log2', random_state=random_state)  # deviance==log_loss
+            elif function is RandomForestClassifier:
+                clf = function(n_estimators=500, max_features=0.25, criterion='entropy', random_state=random_state)
+            elif function is ExtraTreesClassifier:
+                clf = function(n_estimators=1000, max_features='log2', criterion='entropy', random_state=random_state)
+            elif function is SupervisedDBNClassification:
+                clf = function(hidden_layers_structure=[128, 64], learning_rate=5e-6, learning_rate_rbm=5e-6, n_epochs_rbm=10, dropout_p=0, verbose=False)
             elif function is SVC:
-                clf = function(probability=True)
-            else:
-                clf = function(n_estimators=100, random_state=random_state)
+                clf = function(C=0.01, gamma=0.1, kernel="poly", coef0=10.0, random_state=random_state, max_iter=1000)
 
             X_train, X_test, y_train, y_test = train_test_split(
-                X, y, test_size=0.3, random_state=random_state
+                X, y, test_size=0.3, random_state=random_state, stratify=y
             )
-            _accuracy, _roc = train_model(
-                clf, X_train, y_train, X_test, y_test, n_class
-            )
+
+            if function is OrderedModel:
+                clf = function(y_train, X_train)
+                _accuracy, _roc = train_ordered_model(
+                    clf, X_test, y_test, n_class
+                )
+            else:
+                _accuracy, _roc = train_model(
+                    clf, X_train, y_train, X_test, y_test, n_class
+                )
 
             accuracy.append(_accuracy)
             roc[0].append(_roc[0].tolist())
@@ -59,9 +80,9 @@ def calculate(X, y):
 def run(data_path, output_dir, preprocess_func):
     X, y, _ = load_data(data_path, preprocess_func)
     targets = {
-        "effective": {0: 0, 1: 1, 2: 1, 3: 1},
-        "markedly effective": {0: 0, 1: 0, 2: 1, 3: 1},
-        "cured": {0: 0, 1: 0, 2: 0, 3: 1},
+        "minor": {0: 0, 1: 1, 2: 1, 3: 1},
+        "important": {0: 0, 1: 0, 2: 1, 3: 1},
+        "full": {0: 0, 1: 0, 2: 0, 3: 1},
         "all": {0: 0, 1: 1, 2: 2, 3: 3},
     }
 
