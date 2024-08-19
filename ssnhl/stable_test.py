@@ -50,7 +50,7 @@ def calculate(X, y):
             )
 
             if function is OrderedModel:
-                clf = function(y_train, X_train)
+                clf = function(y_train, X_train, distr='logit')
                 _accuracy, _roc = train_ordered_model(
                     clf, X_test, y_test, n_class
                 )
