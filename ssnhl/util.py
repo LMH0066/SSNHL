@@ -8,8 +8,8 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import label_binarize
 
-from SSNHL.miNNseq import miNNseq
-from SSNHL.rpca.extendedRCPA import extendedRPCA
+from ssnhl.miNNseq import miNNseq
+from ssnhl.rpca.extendedRCPA import extendedRPCA
 
 
 def load_data(file_path, preprocess_func: str, result_col: str = "prognostic(no_recovery=0, minor_recovery=1, important_recovery=2, full_recovery=3)"):

@@ -4,8 +4,9 @@ import pandas as pd
 from sklearn.ensemble import *
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVR
+from tqdm import tqdm
 
-from SSNHL.util import load_data, train_regression_model
+from ssnhl.util import load_data, train_regression_model
 
 
 def calculate(X, y):
@@ -24,7 +25,7 @@ def calculate(X, y):
     results, rocs = dict(), dict()
     for function in functions:
         accuracy, roc = [], [[], [], []]
-        for random_state in range(1, 51):
+        for random_state in tqdm(range(1, 51), desc=function.__name__):
             if function is SVR:
                 clf = function()
             else:

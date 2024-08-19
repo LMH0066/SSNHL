@@ -3,13 +3,13 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
-from SSNHL.util import load_data
+from ssnhl.util import load_data
 
 
 def train_models(X, y):
     clfs = []
     for random_state in range(1, 51):
-        clf = RandomForestClassifier(n_estimators=1000, random_state=random_state)
+        clf = RandomForestClassifier(n_estimators=500, max_features=0.25, criterion='entropy')
 
         X_train, _, y_train, _ = train_test_split(
             X, y, test_size=0.3, random_state=random_state, stratify=y

@@ -5,9 +5,9 @@ from sklearn.ensemble import *
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from statsmodels.miscmodels.ordinal_model import OrderedModel
+from tqdm import tqdm
 
-from SSNHL.dbn import SupervisedDBNClassification
-from SSNHL.util import load_data, train_model, train_ordered_model
+from ssnhl.util import load_data, train_model, train_ordered_model
 
 
 def calculate(X, y):
@@ -21,14 +21,13 @@ def calculate(X, y):
         RandomForestClassifier,
         ExtraTreesClassifier,
         # Other
-        SupervisedDBNClassification,
         SVC,
         OrderedModel
     ]
     results, rocs = dict(), dict()
     for function in functions:
         accuracy, roc = [], [[], [], []]
-        for random_state in range(1, 51):
+        for random_state in tqdm(range(1, 51), desc=function.__name__):
             '''
             The hyperparameters of GB, RF, ET and SVC are set based on:
             R. S. Olson, W. L. Cava, Z. Mustahsan, A. Varik, J. H. Moore,
@@ -43,10 +42,8 @@ def calculate(X, y):
                 clf = function(n_estimators=500, max_features=0.25, criterion='entropy', random_state=random_state)
             elif function is ExtraTreesClassifier:
                 clf = function(n_estimators=1000, max_features='log2', criterion='entropy', random_state=random_state)
-            elif function is SupervisedDBNClassification:
-                clf = function(hidden_layers_structure=[128, 64], learning_rate=5e-6, learning_rate_rbm=5e-6, n_epochs_rbm=10, dropout_p=0, verbose=False)
             elif function is SVC:
-                clf = function(C=0.01, gamma=0.1, kernel="poly", coef0=10.0, random_state=random_state, max_iter=1000)
+                clf = function(C=0.01, gamma=0.1, kernel="poly", coef0=10.0, random_state=random_state, probability=True, max_iter=10000)
 
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=0.3, random_state=random_state, stratify=y

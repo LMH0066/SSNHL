@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "SSNHL"
+name = "ssnhl"
 version = "0.1.0"
 description = ""
 authors = ["liminghong.dev <lmh0066@outlook.com>"]
