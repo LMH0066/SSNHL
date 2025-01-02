@@ -46,7 +46,7 @@ def calculate(X, y):
             elif function is SupervisedDBNClassification:
                 clf = function(hidden_layers_structure=[128, 64], learning_rate=5e-6, learning_rate_rbm=5e-6, n_epochs_rbm=10, dropout_p=0, verbose=False)
             elif function is SVC:
-                clf = function(C=0.01, gamma=0.1, kernel="poly", coef0=10.0, random_state=random_state, max_iter=1000)
+                clf = function(C=0.01, gamma=0.1, kernel="poly", coef0=10.0, random_state=random_state, max_iter=1000, probability=True)
 
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=0.3, random_state=random_state, stratify=y
@@ -77,8 +77,14 @@ def calculate(X, y):
 @click.option("--data_path", help=".xlsx file path", type=str)
 @click.option("--output_dir", help="Folder path for results output", type=str)
 @click.option("--preprocess_func", default="default", type=str)
-def run(data_path, output_dir, preprocess_func):
-    X, y, _ = load_data(data_path, preprocess_func)
+@click.option("--ignore_column", multiple=True, default=[])
+def run(data_path, output_dir, preprocess_func, ignore_column):
+    ignore_column = list(ignore_column)
+    X, y, _ = load_data(
+        data_path,
+        preprocess_func,
+        ignore_column=ignore_column,
+    )
     targets = {
         "minor": {0: 0, 1: 1, 2: 1, 3: 1},
         "important": {0: 0, 1: 0, 2: 1, 3: 1},

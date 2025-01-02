@@ -12,8 +12,17 @@ from SSNHL.miNNseq import miNNseq
 from SSNHL.rpca.extendedRCPA import extendedRPCA
 
 
-def load_data(file_path, preprocess_func: str, result_col: str = "prognostic(no_recovery=0, minor_recovery=1, important_recovery=2, full_recovery=3)"):
-    data = pd.read_excel(file_path, index_col=0, header=[0])
+def load_data(
+    file_path_or_data,
+    preprocess_func: str,
+    result_col: str = "prognostic(no_recovery=0, minor_recovery=1, important_recovery=2, full_recovery=3)",
+    ignore_column: list = [],
+):
+    if type(file_path_or_data) is str:
+        data = pd.read_excel(file_path_or_data, index_col=0, header=[0])
+    else:
+        data = file_path_or_data
+    data = data.drop(columns=ignore_column)
 
     if preprocess_func:
         data = data.dropna(subset=[result_col])
